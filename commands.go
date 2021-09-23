@@ -56,9 +56,9 @@ func (Command *SCommands) DOC(arguments ...[]string) error {
 	for fn := range Command.APIFunctions {
 		if len(fn) >= len(arguments[0][0]) {
 			function := Command.APIFunctions[fn]
-			if strings.Contains(strings.ToLower(fn)[0:len(arguments[0][0])], arguments[0][0]) {
+			if strings.EqualFold(strings.ToLower(fn), strings.ToLower(arguments[0][0])) || strings.Contains(strings.ToLower(fn)[0:len(arguments[0][0])], arguments[0][0]) {
+				fmt.Println("found:", fn)
 				if (len(function.Input) > 0 || len(function.Output) > 0) {
-					fmt.Println(fn)
 					
 					for j := range function.Input {
 						fmt.Printf("[%d] %s (%s) - %s\n", j, function.Input[j].Name, function.Input[j].Type, function.Input[j].Desc)
@@ -69,8 +69,10 @@ func (Command *SCommands) DOC(arguments ...[]string) error {
 					}
 					
 					fmt.Println()
+					break
 				} else {
 					fmt.Println("no input/output")
+					break
 				}
 			}
 		}
