@@ -20,7 +20,7 @@ func drawTitle() {
 		BorderTop(true).
 		BorderBottom(true).
 		BorderForeground(borderStyle).
-		Render("Enter a Command" + divider + info("[ Use 'help' ] v1.0 Sandstorm"))
+		Render("Enter a Command" + divider + info("[ Use 'help' ] v1.2 Sandstorm"))
 
 	welcome.WriteString(title)
 
