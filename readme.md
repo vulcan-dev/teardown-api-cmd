@@ -11,6 +11,6 @@
 > doc  
 
 ## Screenshots
-![How it looks](https://imgur.com/9dc83GF)
+![How it looks](https://imgur.com/9dc83GF.png)
 
 Note: I made this because I was bored, I doubt anyone will find this useful :)
