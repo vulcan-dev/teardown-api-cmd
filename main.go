@@ -107,8 +107,8 @@ func HandleInput(commandMap map[string]func(arguments ...[]string) error) {
 					}
 				}
 
-				drawStatus()
 			}
+			drawStatus()
 			// print("> ")
 		}
 	}
