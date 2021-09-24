@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	log "github.com/amoghe/distillog"
+	"github.com/charmbracelet/lipgloss"
 )
 
 type SInput struct {
@@ -74,27 +75,41 @@ func main() {
 	HandleInput(commandMap)
 }
 
+var appStyle = lipgloss.NewStyle().Width(80)
+var borderStyle = lipgloss.AdaptiveColor{Light: "#874BFD", Dark: "#7D56F4"}
+var specialStyle = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
+
 func HandleInput(commandMap map[string]func(arguments ...[]string) error) {
-	print("> ")
 	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		input := scanner.Text()
-		input = strings.ToLower(input)
+	
+	var input string
+	
+	if input == "" {
+		drawTitle()
+		drawStatus()
 		
-		arguments := strings.Fields(input)
-		
-		_, exists := commandMap[arguments[0]]
-		if exists {
-			if len(arguments) <= 1 {
-				err := commandMap[arguments[0]](); if err != nil {
-					fmt.Println(err.Error())
-				}	
-			} else {
-				err := commandMap[arguments[0]](arguments[1:]); if err != nil {
-					fmt.Println(err.Error())
-				}	
+		// print("> ")
+		for scanner.Scan() {
+			input = scanner.Text()
+			input = strings.ToLower(input)
+			
+			arguments := strings.Fields(input)
+			
+			_, exists := commandMap[arguments[0]]
+			if exists {
+				if len(arguments) <= 1 {
+					err := commandMap[arguments[0]](); if err != nil {
+						fmt.Println(err.Error())
+					}	
+				} else {
+					err := commandMap[arguments[0]](arguments[1:]); if err != nil {
+						fmt.Println(err.Error())
+					}
+				}
+
+				drawStatus()
 			}
+			// print("> ")
 		}
-		print("> ")
 	}
 }
