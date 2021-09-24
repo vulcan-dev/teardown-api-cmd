@@ -37,8 +37,10 @@ type SAPI struct {
 
 func main() {
 	util := Utilities{}
+	
 	file, err := util.GetXML(); if err != nil {
-		log.Errorln("unable to find teardown api xml")
+		log.Errorln(err)
+		fmt.Println("press any key to exit")
 		bufio.NewReader(os.Stdin).ReadBytes('\n') 
 		os.Exit(1)
 	}; defer file.Close()
