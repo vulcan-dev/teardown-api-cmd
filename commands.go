@@ -15,11 +15,12 @@ const (
 )
 
 func (Command *SCommands) Help(arguments ...[]string) error {
-	help := `Commands: [help, list, find, search, doc]
+	help := `Commands: [help, version, list, find, search, doc]
 Help usage: help (command)
 	`
 	if len(arguments) >= 1 {
 		commands := make(map[string] string);
+		commands["version"] = "Displays current API Version"
 		commands["list"] = "Lists all functions"
 		commands["find"] = "Find a function via full function name or a partial name"
 		commands["search"] = "Alias of find"
@@ -122,4 +123,15 @@ func (Command *SCommands) DOC(arguments ...[]string) error {
 	}
 	
 	return nil
+}
+
+func (Command *SCommands) Version(arguments ...[]string) error {
+	util := Utilities{}
+	version, err := util.GetVersion(); if err != nil {
+		return err
+	}
+	
+	fmt.Println("API Version:", version)
+	
+	return nil;
 }

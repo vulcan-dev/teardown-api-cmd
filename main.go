@@ -70,6 +70,7 @@ func main() {
 		"find": command.Find,
 		"search": command.Find,
 		"doc": command.DOC,
+		"version": command.Version,
 	}
 	
 	HandleInput(commandMap)
