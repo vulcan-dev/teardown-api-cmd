@@ -84,7 +84,12 @@ func (util *Utilities) GetXML() (*os.File, error) {
 			log.Println("using offline mode")
 		}
 	}
-
+	
+	if file != fmt.Sprintf("api-%s.xml", version) {
+		os.Remove(file)
+		util.DownloadLatestXML()
+	}
+	
 	if file == "api-.xml" {
 		return nil, errors.New("unable to find teardown api xml, please make sure you are connected to the internet to download")
 	}
