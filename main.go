@@ -89,7 +89,6 @@ func HandleInput(commandMap map[string]func(arguments ...[]string) error) {
 		drawTitle()
 		drawStatus()
 		
-		// print("> ")
 		for scanner.Scan() {
 			input = scanner.Text()
 			input = strings.ToLower(input)
@@ -109,8 +108,8 @@ func HandleInput(commandMap map[string]func(arguments ...[]string) error) {
 				}
 
 			}
+
 			drawStatus()
-			// print("> ")
 		}
 	}
 }
