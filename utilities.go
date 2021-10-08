@@ -57,8 +57,6 @@ func (utilities *Utilities) DownloadLatestXML() error {
 		return err
 	}
 	
-	fmt.Println("downloaded", file)
-	
 	return nil
 }
 
@@ -93,8 +91,6 @@ func (util *Utilities) GetXML() (*os.File, error) {
 	if file == "api-.xml" {
 		return nil, errors.New("unable to find teardown api xml, please make sure you are connected to the internet to download")
 	}
-	
-	fmt.Println("file found:", file)
 	
 	/* Open File */
 	file, err := os.Open(file); if err != nil {
