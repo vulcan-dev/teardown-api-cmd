@@ -1,16 +1,31 @@
+## Commands
+> Help [Displays List of Commands]  
+> List [Displays All Functions]  
+> Search [Search for a Function (Alias: find)]   
+> Doc [Display Documentation for Function]  
+> Download [Download the API for Offline Use]  
+
+## Screenshots
+![How it looks](https://i.imgur.com/5scQhBc.png)
+
 ## Building
 > go build -ldflags "-s -w" -o ./build/api.exe ./
 
-## Get the latest XML from https://www.teardowngame.com/modding/api.xml
+## Updates
+# 1.3.3
+> Ability to use the API without downloading  
+> Added command 'download'  
+> Improved Formatting  
+> Online/Offline Status  
 
-## Commands
-> help  
-> list  
-> search  
-> find  
-> doc  
+# 1.3.2
+> Fixed GetXML() not getting the latest version  
+> Removed console logging for the api file  
+> Updated version  
+> GetXML now deletes the old API xml  
 
-## Screenshots
-![How it looks](https://imgur.com/Ealcngz.png)
+# 1.2.0
+> Improved Visuals  
 
-Note: I made this because I was bored, I doubt anyone will find this useful :)
+# < 1.2
+> Initial Release & Bug Fixes
