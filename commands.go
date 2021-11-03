@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -67,8 +68,14 @@ Example 3: doc IsShapeVisible
 }
 
 func (Command *SCommands) List(arguments ...[]string) error {
+	var functions[] string
 	for fn := range Command.APIFunctions {
-		fmt.Println(fn)
+		functions = append(functions, fn)
+	}
+
+	sort.Strings(functions)
+	for fn := range functions {
+		fmt.Println(functions[fn])
 	}
 	
 	return nil
