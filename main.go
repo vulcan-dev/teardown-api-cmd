@@ -90,6 +90,7 @@ func main() {
 		"search": command.Find,
 		"doc": command.DOC,
 		"version": command.Version,
+		"download": command.Download,
 	}
 	
 	HandleInput(commandMap)

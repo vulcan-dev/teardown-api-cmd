@@ -25,6 +25,7 @@ Help usage: help (command)
 		commands["list"] = "Lists all functions"
 		commands["find"] = "Find a function via full function name or a partial name"
 		commands["search"] = "Alias of find"
+		commands["download"] = "Download the API for Offline Use"
 		commands["doc"] = `Returns the documentation for the function
 Example 1: doc register
 [RegisterTool]
@@ -142,10 +143,21 @@ func (Command *SCommands) DOC(arguments ...[]string) error {
 func (Command *SCommands) Version(arguments ...[]string) error {
 	util := Utilities{}
 	version, err := util.GetVersion(); if err != nil {
-		return err
+		return errors.New("Error: Unable to Fetch Version")
 	}
 	
-	fmt.Println("API Version:", version)
+	fmt.Printf("API Version: %s\n", version)
 	
-	return nil;
+	return nil
+}
+
+func (Command* SCommands) Download(arguments ...[]string) error {
+	util := Utilities{}
+	err := util.DownloadLatestXML(); if err != nil {
+		return errors.New("Error: Unable to Download API")
+	}
+	
+	fmt.Printf("Successfully Downloaded API\n")
+	
+	return nil
 }
