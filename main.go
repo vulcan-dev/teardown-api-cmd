@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"strings"
 
@@ -12,43 +13,27 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-type SInput struct {
-	Name string `xml:"name,attr"`
-	Type string `xml:"type,attr"`
-	Optional string `xml:"optional,attr"`
-	Desc string `xml:"desc,attr"`
-}
+var (
+	/* Styles */
+	appStyle = lipgloss.NewStyle().Width(80)
+	borderStyle = lipgloss.AdaptiveColor{Light: "#874BFD", Dark: "#7D56F4"}
+	specialStyle = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
+	
+	api SAPI
+	command SCommands
+	input string
+	offline bool
+)
 
-type SOutput struct {
-	Name string `xml:"name,attr"`
-	Type string `xml:"type,attr"`
-	Desc string `xml:"desc,attr"`
-}
-
-type SFunctions struct {
-	Name string `xml:"name,attr"`
-	Output []SOutput `xml:"output"`
-	Input []SInput `xml:"input"`
-}
-
-type SAPI struct {
-	XMLName xml.Name `xml:"api"`
-	Function []SFunctions `xml:"function"`
-}
-
-func main() {
+func SetupAPIFile() error {
 	util := Utilities{}
 	
 	file, err := util.GetXML(); if err != nil {
-		log.Errorln(err)
-		fmt.Println("press any key to exit")
-		bufio.NewReader(os.Stdin).ReadBytes('\n') 
-		os.Exit(1)
+		return err
 	}; defer file.Close()
 
 	/* Read api from file */
 	byteValue, _ := ioutil.ReadAll(file)
-	var api SAPI
 
 	if err := xml.Unmarshal(byteValue, &api); err != nil {
 		log.Errorln("unmarshal failed:", err.Error())
@@ -62,8 +47,42 @@ func main() {
 		}
 	}
 	
-	command := SCommands{}
 	command.APIFunctions = functions
+	return nil
+}
+
+func SetupAPIOnline() error {
+	r, err := http.Get("https://www.teardowngame.com/modding/api.xml"); if err != nil {
+		return err
+	}; defer r.Body.Close()
+
+	err = xml.NewDecoder(r.Body).Decode(&api); if err != nil {
+		fmt.Printf("failed decoding\n");
+	}
+	
+	functions := make(map[string]SFunctions)
+	
+	for i := 0; i < len(api.Function); i++ {
+		for i := 0; i < len(api.Function); i++ {
+			functions[api.Function[i].Name] = api.Function[i]
+		}
+	}
+	
+	command.APIFunctions = functions
+	return nil
+}
+
+func main() {
+	err := SetupAPIOnline(); if err != nil {
+		offline = true
+		err := SetupAPIFile(); if err != nil {
+			fmt.Printf("Error: %s\n", err.Error())
+			fmt.Println("Press Enter to Exit")
+			bufio.NewReader(os.Stdin).ReadBytes('\n') 
+			os.Exit(1)	
+		}
+	}
+	
 	commandMap := map[string] func(arguments ...[]string) error {
 		"help": command.Help,
 		"list": command.List,
@@ -76,14 +95,8 @@ func main() {
 	HandleInput(commandMap)
 }
 
-var appStyle = lipgloss.NewStyle().Width(80)
-var borderStyle = lipgloss.AdaptiveColor{Light: "#874BFD", Dark: "#7D56F4"}
-var specialStyle = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
-
 func HandleInput(commandMap map[string]func(arguments ...[]string) error) {
 	scanner := bufio.NewScanner(os.Stdin)
-	
-	var input string
 	
 	if input == "" {
 		drawTitle()

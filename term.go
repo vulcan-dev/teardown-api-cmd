@@ -12,6 +12,9 @@ func drawTitle() {
 
 	info := lipgloss.NewStyle().Foreground(specialStyle).Render
 	welcome := strings.Builder{}
+	
+	onlineStatus := "[Status: Online]"
+	if offline { onlineStatus = "[Status: Offline]" }
 
 	title := lipgloss.NewStyle().
 		Padding(0, 0, 0, 0).
@@ -20,7 +23,7 @@ func drawTitle() {
 		BorderTop(true).
 		BorderBottom(true).
 		BorderForeground(borderStyle).
-		Render("Enter a Command" + divider + info("[ Use 'help' ] v1.3.2 Duckmode"))
+		Render("Enter a Command" + divider + info("[ Use 'help' ] v1.3.2 Duckmode  ") + info(onlineStatus))
 
 	welcome.WriteString(title)
 

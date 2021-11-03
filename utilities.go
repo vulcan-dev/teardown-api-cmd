@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"regexp"
@@ -16,11 +15,14 @@ import (
 
 type Utilities struct{}
 
-var (
-	version string = "0.0"
+const (
 	apiHtml string = "https://www.teardowngame.com/modding/api.html"
 	apiXml string = "https://www.teardowngame.com/modding/api.xml"
+)
+
+var (
 	file string
+	version string
 )
 
 func (utilities *Utilities) GetVersion() (string, error) {
@@ -78,24 +80,13 @@ func (util *Utilities) GetXML() (*os.File, error) {
     }
 	
 	if !found {
-		err = util.DownloadLatestXML(); if err != nil {
-			log.Println("using offline mode")
-		}
-	}
-	
-	if file != fmt.Sprintf("api-%s.xml", version) {
-		os.Remove(file)
-		util.DownloadLatestXML()
-	}
-	
-	if file == "api-.xml" {
-		return nil, errors.New("unable to find teardown api xml, please make sure you are connected to the internet to download")
+		return nil, errors.New("Unable to find Teardown's API XML (api-*.xml), please make sure you are connected to the internet to download.")
 	}
 	
 	/* Open File */
 	file, err := os.Open(file); if err != nil {
-		return nil, fmt.Errorf("failed opening file \"%s\": %s", file.Name(), err)
+		return nil, fmt.Errorf("Unable to Open \"%s\": %s", file.Name(), err)
 	};
-	
+
 	return file, nil
 }
