@@ -16,8 +16,8 @@ const (
 )
 
 func (Command *SCommands) Help(arguments ...[]string) error {
-	help := `Commands: [help, version, list, find, search, doc]
-Help usage: help (command)
+	help := `Commands: [Help, Version, List, Find, Search, Doc, Download]
+Help Usage: Help (Command)
 	`
 	if len(arguments) >= 1 {
 		commands := make(map[string] string);
