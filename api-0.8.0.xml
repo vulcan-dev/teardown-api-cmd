@@ -1,0 +1,1269 @@
+<api>
+	<function name="GetIntParam">
+		<input name="name" type="string" optional="false" desc="Parameter name"/>
+		<input name="default" type="number" optional="false" desc="Default parameter value"/>
+		<output name="value" type="number" desc="Parameter value"/>
+	</function>
+	<function name="GetFloatParam">
+		<input name="name" type="string" optional="false" desc="Parameter name"/>
+		<input name="default" type="number" optional="false" desc="Default parameter value"/>
+		<output name="value" type="number" desc="Parameter value"/>
+	</function>
+	<function name="GetBoolParam">
+		<input name="name" type="string" optional="false" desc="Parameter name"/>
+		<input name="default" type="boolean" optional="false" desc="Default parameter value"/>
+		<output name="value" type="boolean" desc="Parameter value"/>
+	</function>
+	<function name="GetStringParam">
+		<input name="name" type="string" optional="false" desc="Parameter name"/>
+		<input name="default" type="string" optional="false" desc="Default parameter value"/>
+		<output name="value" type="string" desc="Parameter value"/>
+	</function>
+	<function name="GetVersion">
+		<output name="version" type="string" desc="Dot separated string of current version of the game"/>
+	</function>
+	<function name="HasVersion">
+		<input name="version" type="string" optional="false" desc="Reference version"/>
+		<output name="match" type="boolean" desc="True if current version is at least provided one"/>
+	</function>
+	<function name="GetTime">
+		<output name="time" type="number" desc="The time in seconds since level was started"/>
+	</function>
+	<function name="GetTimeStep">
+		<output name="dt" type="number" desc="The timestep in seconds"/>
+	</function>
+	<function name="InputLastPressedKey">
+		<output name="name" type="string" desc="Name of last pressed key, empty if no key is pressed"/>
+	</function>
+	<function name="InputPressed">
+		<input name="input" type="string" optional="false" desc="The input identifier"/>
+		<output name="pressed" type="boolean" desc="True if input was pressed during last frame"/>
+	</function>
+	<function name="InputReleased">
+		<input name="input" type="string" optional="false" desc="The input identifier"/>
+		<output name="pressed" type="boolean" desc="True if input was released during last frame"/>
+	</function>
+	<function name="InputDown">
+		<input name="input" type="string" optional="false" desc="The input identifier"/>
+		<output name="pressed" type="boolean" desc="True if input is currently held down"/>
+	</function>
+	<function name="InputValue">
+		<input name="input" type="string" optional="false" desc="The input identifier"/>
+		<output name="value" type="number" desc="Depends on input type"/>
+	</function>
+	<function name="SetValue">
+		<input name="variable" type="string" optional="false" desc="Name of number variable in the global context"/>
+		<input name="value" type="number" optional="false" desc="The new value"/>
+		<input name="transition" type="string" optional="true" desc="Transition type. See description."/>
+		<input name="time" type="number" optional="true" desc="Transition time (seconds)"/>
+	</function>
+	<function name="PauseMenuButton">
+		<input name="title" type="string" optional="false" desc="Text on button"/>
+		<output name="true" type="if" desc=""/>
+	</function>
+	<function name="StartLevel">
+		<input name="mission" type="string" optional="false" desc="An identifier of your choice"/>
+		<input name="path" type="string" optional="false" desc="Path to level XML file"/>
+		<input name="layers" type="string" optional="true" desc="Active layers. Default is no layers."/>
+	</function>
+	<function name="SetPaused">
+		<input name="paused" type="boolean" optional="false" desc="True if game should be paused"/>
+	</function>
+	<function name="Restart">
+	</function>
+	<function name="Menu">
+	</function>
+	<function name="ClearKey">
+		<input name="key" type="string" optional="false" desc="Registry key to clear"/>
+	</function>
+	<function name="ListKeys">
+		<input name="parent" type="string" optional="false" desc="The parent registry key"/>
+		<output name="children" type="table" desc="Indexed table of strings with child keys"/>
+	</function>
+	<function name="HasKey">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<output name="exists" type="boolean" desc="True if key exists"/>
+	</function>
+	<function name="SetInt">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<input name="value" type="number" optional="false" desc="Desired value"/>
+	</function>
+	<function name="GetInt">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<output name="value" type="number" desc="Integer value of registry node or zero if not found"/>
+	</function>
+	<function name="SetFloat">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<input name="value" type="number" optional="false" desc="Desired value"/>
+	</function>
+	<function name="GetFloat">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<output name="value" type="number" desc="Float value of registry node or zero if not found"/>
+	</function>
+	<function name="SetBool">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<input name="value" type="boolean" optional="false" desc="Desired value"/>
+	</function>
+	<function name="GetBool">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<output name="value" type="boolean" desc="Boolean value of registry node or false if not found"/>
+	</function>
+	<function name="SetString">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<input name="value" type="string" optional="false" desc="Desired value"/>
+	</function>
+	<function name="GetString">
+		<input name="key" type="string" optional="false" desc="Registry key"/>
+		<output name="value" type="string" desc="String value of registry node or '' if not found"/>
+	</function>
+	<function name="Vec">
+		<input name="x" type="number" optional="true" desc="X value"/>
+		<input name="y" type="number" optional="true" desc="Y value"/>
+		<input name="z" type="number" optional="true" desc="Z value"/>
+		<output name="vec" type="table" desc="New vector"/>
+	</function>
+	<function name="VecCopy">
+		<input name="org" type="table" optional="false" desc="A vector"/>
+		<output name="new" type="table" desc="Copy of org vector"/>
+	</function>
+	<function name="VecLength">
+		<input name="vec" type="table" optional="false" desc="A vector"/>
+		<output name="length" type="number" desc="Length (magnitude) of the vector"/>
+	</function>
+	<function name="VecNormalize">
+		<input name="vec" type="table" optional="false" desc="A vector"/>
+		<output name="norm" type="table" desc="A vector of length 1.0"/>
+	</function>
+	<function name="VecScale">
+		<input name="vec" type="table" optional="false" desc="A vector"/>
+		<input name="scale" type="number" optional="false" desc="A scale factor"/>
+		<output name="norm" type="table" desc="A scaled version of input vector"/>
+	</function>
+	<function name="VecAdd">
+		<input name="a" type="table" optional="false" desc="Vector"/>
+		<input name="b" type="table" optional="false" desc="Vector"/>
+		<output name="c" type="table" desc="New vector with sum of a and b"/>
+	</function>
+	<function name="VecSub">
+		<input name="a" type="table" optional="false" desc="Vector"/>
+		<input name="b" type="table" optional="false" desc="Vector"/>
+		<output name="c" type="table" desc="New vector representing a-b"/>
+	</function>
+	<function name="VecDot">
+		<input name="a" type="table" optional="false" desc="Vector"/>
+		<input name="b" type="table" optional="false" desc="Vector"/>
+		<output name="c" type="number" desc="Dot product of a and b"/>
+	</function>
+	<function name="VecCross">
+		<input name="a" type="table" optional="false" desc="Vector"/>
+		<input name="b" type="table" optional="false" desc="Vector"/>
+		<output name="c" type="table" desc="Cross product of a and b (also called vector product)"/>
+	</function>
+	<function name="VecLerp">
+		<input name="a" type="table" optional="false" desc="Vector"/>
+		<input name="b" type="table" optional="false" desc="Vector"/>
+		<input name="t" type="number" optional="false" desc="fraction (usually between 0.0 and 1.0)"/>
+		<output name="c" type="table" desc="Linearly interpolated vector between a and b, using t"/>
+	</function>
+	<function name="Quat">
+		<input name="x" type="number" optional="true" desc="X value"/>
+		<input name="y" type="number" optional="true" desc="Y value"/>
+		<input name="z" type="number" optional="true" desc="Z value"/>
+		<input name="w" type="number" optional="true" desc="W value"/>
+		<output name="quat" type="table" desc="New quaternion"/>
+	</function>
+	<function name="QuatCopy">
+		<input name="org" type="table" optional="false" desc="Quaternion"/>
+		<output name="new" type="table" desc="Copy of org quaternion"/>
+	</function>
+	<function name="QuatAxisAngle">
+		<input name="axis" type="table" optional="false" desc="Rotation axis, unit vector"/>
+		<input name="angle" type="number" optional="false" desc="Rotation angle in degrees"/>
+		<output name="quat" type="table" desc="New quaternion"/>
+	</function>
+	<function name="QuatEuler">
+		<input name="x" type="number" optional="false" desc="Angle around X axis in degrees, sometimes also called roll or bank"/>
+		<input name="y" type="number" optional="false" desc="Angle around Y axis in degrees, sometimes also called yaw or heading"/>
+		<input name="z" type="number" optional="false" desc="Angle around Z axis in degrees, sometimes also called pitch or attitude"/>
+		<output name="quat" type="table" desc="New quaternion"/>
+	</function>
+	<function name="GetQuatEuler">
+		<input name="quat" type="table" optional="false" desc="Quaternion"/>
+		<output name="x" type="number" desc="Angle around X axis in degrees, sometimes also called roll or bank"/>
+		<output name="y" type="number" desc="Angle around Y axis in degrees, sometimes also called yaw or heading"/>
+		<output name="z" type="number" desc="Angle around Z axis in degrees, sometimes also called pitch or attitude"/>
+	</function>
+	<function name="QuatLookAt">
+		<input name="eye" type="table" optional="false" desc="Vector representing the camera location"/>
+		<input name="target" type="table" optional="false" desc="Vector representing the point to look at"/>
+		<output name="quat" type="table" desc="New quaternion"/>
+	</function>
+	<function name="QuatSlerp">
+		<input name="a" type="table" optional="false" desc="Quaternion"/>
+		<input name="b" type="table" optional="false" desc="Quaternion"/>
+		<input name="t" type="number" optional="false" desc="fraction (usually between 0.0 and 1.0)"/>
+		<output name="c" type="table" desc="New quaternion"/>
+	</function>
+	<function name="QuatRotateQuat">
+		<input name="a" type="table" optional="false" desc="Quaternion"/>
+		<input name="b" type="table" optional="false" desc="Quaternion"/>
+		<output name="c" type="table" desc="New quaternion"/>
+	</function>
+	<function name="Transform">
+		<input name="pos" type="table" optional="true" desc="Vector representing transform position"/>
+		<input name="rot" type="table" optional="true" desc="Quaternion representing transform rotation"/>
+		<output name="transform" type="table" desc="New transform"/>
+	</function>
+	<function name="TransformCopy">
+		<input name="org" type="table" optional="false" desc="Transform"/>
+		<output name="new" type="table" desc="Copy of org transform"/>
+	</function>
+	<function name="TransformToParentTransform">
+		<input name="parent" type="table" optional="false" desc="Transform"/>
+		<input name="child" type="table" optional="false" desc="Transform"/>
+		<output name="transform" type="table" desc="New transform"/>
+	</function>
+	<function name="TransformToLocalTransform">
+		<input name="parent" type="table" optional="false" desc="Transform"/>
+		<input name="child" type="table" optional="false" desc="Transform"/>
+		<output name="transform" type="table" desc="New transform"/>
+	</function>
+	<function name="TransformToParentVec">
+		<input name="t" type="table" optional="false" desc="Transform"/>
+		<input name="v" type="table" optional="false" desc="Vector"/>
+		<output name="r" type="table" desc="Transformed vector"/>
+	</function>
+	<function name="TransformToLocalVec">
+		<input name="t" type="table" optional="false" desc="Transform"/>
+		<input name="v" type="table" optional="false" desc="Vector"/>
+		<output name="r" type="table" desc="Transformed vector"/>
+	</function>
+	<function name="TransformToParentPoint">
+		<input name="t" type="table" optional="false" desc="Transform"/>
+		<input name="p" type="table" optional="false" desc="Vector representing position"/>
+		<output name="r" type="table" desc="Transformed position"/>
+	</function>
+	<function name="TransformToLocalPoint">
+		<input name="t" type="table" optional="false" desc="Transform"/>
+		<input name="p" type="table" optional="false" desc="Vector representing position"/>
+		<output name="r" type="table" desc="Transformed position"/>
+	</function>
+	<function name="SetTag">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="value" type="string" optional="true" desc="Tag value"/>
+	</function>
+	<function name="RemoveTag">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+	</function>
+	<function name="HasTag">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<output name="exists" type="boolean" desc="Returns true if entity has tag"/>
+	</function>
+	<function name="GetTagValue">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<output name="value" type="string" desc="Returns the tag value, if any. Empty string otherwise."/>
+	</function>
+	<function name="GetDescription">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<output name="description" type="string" desc="The description string"/>
+	</function>
+	<function name="SetDescription">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<input name="description" type="string" optional="false" desc="The description string"/>
+	</function>
+	<function name="Delete">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+	</function>
+	<function name="IsHandleValid">
+		<input name="handle" type="number" optional="false" desc="Entity handle"/>
+		<output name="exists" type="boolean" desc="Returns true if the entity pointed to by handle still exists"/>
+	</function>
+	<function name="FindBody">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first body with specified tag or zero if not found"/>
+	</function>
+	<function name="FindBodies">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all bodies with specified tag"/>
+	</function>
+	<function name="GetBodyTransform">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="transform" type="table" desc="Transform of the body"/>
+	</function>
+	<function name="SetBodyTransform">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<input name="transform" type="table" optional="false" desc="Desired transform"/>
+	</function>
+	<function name="GetBodyMass">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="mass" type="number" desc="Body mass. Static bodies always return zero mass."/>
+	</function>
+	<function name="IsBodyDynamic">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="dynamic" type="boolean" desc="Return true if body is dynamic"/>
+	</function>
+	<function name="SetBodyDynamic">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<input name="dynamic" type="boolean" optional="false" desc="True for dynamic. False for static."/>
+	</function>
+	<function name="SetBodyVelocity">
+		<input name="handle" type="number" optional="false" desc="Body handle (should be a dynamic body)"/>
+		<input name="velocity" type="table" optional="false" desc="Vector with linear velocity"/>
+	</function>
+	<function name="GetBodyVelocity">
+		<input name="handle" type="number" optional="false" desc="Body handle (should be a dynamic body)"/>
+		<output name="velocity" type="table" desc="Linear velocity as vector"/>
+	</function>
+	<function name="GetBodyVelocityAtPos">
+		<input name="handle" type="number" optional="false" desc="Body handle (should be a dynamic body)"/>
+		<input name="pos" type="table" optional="false" desc="World space point as vector"/>
+		<output name="velocity" type="table" desc="Linear velocity on body at pos as vector"/>
+	</function>
+	<function name="SetBodyAngularVelocity">
+		<input name="handle" type="number" optional="false" desc="Body handle (should be a dynamic body)"/>
+		<input name="angVel" type="table" optional="false" desc="Vector with angular velocity"/>
+	</function>
+	<function name="GetBodyAngularVelocity">
+		<input name="handle" type="number" optional="false" desc="Body handle (should be a dynamic body)"/>
+		<output name="angVel" type="table" desc="Angular velocity as vector"/>
+	</function>
+	<function name="IsBodyActive">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="active" type="boolean" desc="Return true if body is active"/>
+	</function>
+	<function name="ApplyBodyImpulse">
+		<input name="handle" type="number" optional="false" desc="Body handle (should be a dynamic body)"/>
+		<input name="position" type="table" optional="false" desc="World space position as vector"/>
+		<input name="impulse" type="table" optional="false" desc="World space impulse as vector"/>
+	</function>
+	<function name="GetBodyShapes">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="list" type="table" desc="Indexed table of shape handles"/>
+	</function>
+	<function name="GetBodyVehicle">
+		<input name="body" type="number" optional="false" desc="Body handle"/>
+		<output name="handle" type="number" desc="Get parent vehicle for body, or zero if not part of vehicle"/>
+	</function>
+	<function name="GetBodyBounds">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="min" type="table" desc="Vector representing the AABB lower bound"/>
+		<output name="max" type="table" desc="Vector representing the AABB upper bound"/>
+	</function>
+	<function name="GetBodyCenterOfMass">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="point" type="table" desc="Vector representing local center of mass in body space"/>
+	</function>
+	<function name="IsBodyVisible">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<input name="maxDist" type="number" optional="false" desc="Maximum visible distance"/>
+		<input name="rejectTransparent" type="boolean" optional="true" desc="See through transparent materials. Default false."/>
+		<output name="visible" type="boolean" desc="Return true if body is visible"/>
+	</function>
+	<function name="IsBodyBroken">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="broken" type="boolean" desc="Return true if body is broken"/>
+	</function>
+	<function name="IsBodyJointedToStatic">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<output name="result" type="boolean" desc="Return true if body is in any way connected to a static body"/>
+	</function>
+	<function name="DrawBodyOutline">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<input name="r" type="number" optional="true" desc="Red"/>
+		<input name="g" type="number" optional="true" desc="Green"/>
+		<input name="b" type="number" optional="true" desc="Blue"/>
+		<input name="a" type="number" optional="false" desc="Alpha"/>
+	</function>
+	<function name="DrawBodyHighlight">
+		<input name="handle" type="number" optional="false" desc="Body handle"/>
+		<input name="amount" type="number" optional="false" desc="Amount"/>
+	</function>
+	<function name="FindShape">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first shape with specified tag or zero if not found"/>
+	</function>
+	<function name="FindShapes">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all shapes with specified tag"/>
+	</function>
+	<function name="GetShapeLocalTransform">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="transform" type="table" desc="Return shape transform in body space"/>
+	</function>
+	<function name="SetShapeLocalTransform">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="transform" type="table" optional="false" desc="Shape transform in body space"/>
+	</function>
+	<function name="GetShapeWorldTransform">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="transform" type="table" desc="Return shape transform in world space"/>
+	</function>
+	<function name="GetShapeBody">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="handle" type="number" desc="Body handle"/>
+	</function>
+	<function name="GetShapeJoints">
+		<input name="shape" type="number" optional="false" desc="Shape handle"/>
+		<output name="list" type="table" desc="Indexed table with joints connected to shape"/>
+	</function>
+	<function name="GetShapeLights">
+		<input name="shape" type="number" optional="false" desc="Shape handle"/>
+		<output name="list" type="table" desc="Indexed table of lights owned by shape"/>
+	</function>
+	<function name="GetShapeBounds">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="min" type="table" desc="Vector representing the AABB lower bound"/>
+		<output name="max" type="table" desc="Vector representing the AABB upper bound"/>
+	</function>
+	<function name="SetShapeEmissiveScale">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="scale" type="number" optional="false" desc="Scale factor for emissiveness"/>
+	</function>
+	<function name="GetShapeMaterialAtPosition">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="pos" type="table" optional="false" desc="Position in world space"/>
+		<output name="type" type="string" desc="Material type"/>
+		<output name="r" type="number" desc="Red"/>
+		<output name="g" type="number" desc="Green"/>
+		<output name="b" type="number" desc="Blue"/>
+		<output name="a" type="number" desc="Alpha"/>
+	</function>
+	<function name="GetShapeMaterialAtIndex">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="x" type="number" optional="false" desc="X integer coordinate"/>
+		<input name="y" type="number" optional="false" desc="Y integer coordinate"/>
+		<input name="z" type="number" optional="false" desc="Z integer coordinate"/>
+		<output name="type" type="string" desc="Material type"/>
+		<output name="r" type="number" desc="Red"/>
+		<output name="g" type="number" desc="Green"/>
+		<output name="b" type="number" desc="Blue"/>
+		<output name="a" type="number" desc="Alpha"/>
+	</function>
+	<function name="GetShapeClosestPoint">
+		<input name="shape" type="number" optional="false" desc="Shape handle"/>
+		<input name="origin" type="table" optional="false" desc="World space point"/>
+		<input name="maxDist" type="[number]" optional="false" desc=""/>
+		<output name="hit" type="boolean" desc="True if a point was found"/>
+		<output name="point" type="table" desc="World space closest point"/>
+		<output name="normal" type="table" desc="World space normal at closest point"/>
+	</function>
+	<function name="GetShapeSize">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="xsize" type="number" desc="Size in voxels along x axis"/>
+		<output name="ysize" type="number" desc="Size in voxels along y axis"/>
+		<output name="zsize" type="number" desc="Size in voxels along z axis"/>
+		<output name="scale" type="number" desc="The size of one voxel in meters (with default scale it is 0.1)"/>
+	</function>
+	<function name="GetShapeVoxelCount">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="count" type="number" desc="Number of voxels in shape"/>
+	</function>
+	<function name="IsShapeVisible">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="maxDist" type="number" optional="false" desc="Maximum visible distance"/>
+		<input name="rejectTransparent" type="boolean" optional="true" desc="See through transparent materials. Default false."/>
+		<output name="visible" type="boolean" desc="Return true if shape is visible"/>
+	</function>
+	<function name="IsShapeBroken">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<output name="broken" type="boolean" desc="Return true if shape is broken"/>
+	</function>
+	<function name="DrawShapeOutline">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="r" type="number" optional="true" desc="Red"/>
+		<input name="g" type="number" optional="true" desc="Green"/>
+		<input name="b" type="number" optional="true" desc="Blue"/>
+		<input name="a" type="number" optional="false" desc="Alpha"/>
+	</function>
+	<function name="DrawShapeHighlight">
+		<input name="handle" type="number" optional="false" desc="Shape handle"/>
+		<input name="amount" type="number" optional="false" desc="Amount"/>
+	</function>
+	<function name="FindLocation">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first location with specified tag or zero if not found"/>
+	</function>
+	<function name="FindLocations">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all locations with specified tag"/>
+	</function>
+	<function name="GetLocationTransform">
+		<input name="handle" type="number" optional="false" desc="Location handle"/>
+		<output name="transform" type="table" desc="Transform of the location"/>
+	</function>
+	<function name="FindJoint">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first joint with specified tag or zero if not found"/>
+	</function>
+	<function name="FindJoints">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all joints with specified tag"/>
+	</function>
+	<function name="IsJointBroken">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<output name="broken" type="boolean" desc="True if joint is broken"/>
+	</function>
+	<function name="GetJointType">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<output name="type" type="string" desc="Joint type"/>
+	</function>
+	<function name="GetJointOtherShape">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<input name="shape" type="number" optional="false" desc="Shape handle"/>
+		<output name="other" type="number" desc="Other shape handle"/>
+	</function>
+	<function name="SetJointMotor">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<input name="velocity" type="number" optional="false" desc="Desired velocity"/>
+		<input name="strength" type="number" optional="true" desc="Desired strength. Default is infinite. Zero to disable."/>
+	</function>
+	<function name="SetJointMotorTarget">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<input name="target" type="number" optional="false" desc="Desired movement target"/>
+		<input name="maxVel" type="number" optional="true" desc="Maximum velocity to reach target. Default is infinite."/>
+		<input name="strength" type="number" optional="true" desc="Desired strength. Default is infinite. Zero to disable."/>
+	</function>
+	<function name="GetJointLimits">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<output name="min" type="number" desc="Minimum joint limit (angle or distance)"/>
+		<output name="max" type="number" desc="Maximum joint limit (angle or distance)"/>
+	</function>
+	<function name="GetJointMovement">
+		<input name="joint" type="number" optional="false" desc="Joint handle"/>
+		<output name="movement" type="number" desc="Current joint position or angle"/>
+	</function>
+	<function name="FindLight">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first light with specified tag or zero if not found"/>
+	</function>
+	<function name="FindLights">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all lights with specified tag"/>
+	</function>
+	<function name="SetLightEnabled">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<input name="enabled" type="boolean" optional="false" desc="Set to true if light should be enabled"/>
+	</function>
+	<function name="SetLightColor">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<input name="r" type="number" optional="false" desc="Red value"/>
+		<input name="g" type="number" optional="false" desc="Green value"/>
+		<input name="b" type="number" optional="false" desc="Blue value"/>
+	</function>
+	<function name="SetLightIntensity">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<input name="intensity" type="number" optional="false" desc="Desired intensity of the light"/>
+	</function>
+	<function name="GetLightTransform">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<output name="transform" type="table" desc="World space light transform"/>
+	</function>
+	<function name="GetLightShape">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<output name="handle" type="number" desc="Shape handle or zero if not attached to shape"/>
+	</function>
+	<function name="IsLightActive">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<output name="active" type="boolean" desc="True if light is currently emitting light"/>
+	</function>
+	<function name="IsPointAffectedByLight">
+		<input name="handle" type="number" optional="false" desc="Light handle"/>
+		<input name="point" type="table" optional="false" desc="World space point as vector"/>
+		<output name="affected" type="boolean" desc="Return true if point is in light cone and range"/>
+	</function>
+	<function name="FindTrigger">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first trigger with specified tag or zero if not found"/>
+	</function>
+	<function name="FindTriggers">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all triggers with specified tag"/>
+	</function>
+	<function name="GetTriggerTransform">
+		<input name="handle" type="number" optional="false" desc="Trigger handle"/>
+		<output name="transform" type="table" desc="Current trigger transform in world space"/>
+	</function>
+	<function name="SetTriggerTransform">
+		<input name="handle" type="number" optional="false" desc="Trigger handle"/>
+		<input name="transform" type="table" optional="false" desc="Desired trigger transform in world space"/>
+	</function>
+	<function name="GetTriggerBounds">
+		<input name="handle" type="number" optional="false" desc="Trigger handle"/>
+		<output name="min" type="table" desc="Lower point of trigger bounds in world space"/>
+		<output name="max" type="table" desc="Upper point of trigger bounds in world space"/>
+	</function>
+	<function name="IsBodyInTrigger">
+		<input name="trigger" type="number" optional="false" desc="Trigger handle"/>
+		<input name="body" type="number" optional="false" desc="Body handle"/>
+	</function>
+	<function name="IsVehicleInTrigger">
+		<input name="trigger" type="number" optional="false" desc="Trigger handle"/>
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+	</function>
+	<function name="IsShapeInTrigger">
+		<input name="trigger" type="number" optional="false" desc="Trigger handle"/>
+		<input name="shape" type="number" optional="false" desc="Shape handle"/>
+	</function>
+	<function name="IsPointInTrigger">
+		<input name="trigger" type="number" optional="false" desc="Trigger handle"/>
+		<input name="point" type="table" optional="false" desc="Word space point as vector"/>
+	</function>
+	<function name="IsTriggerEmpty">
+		<input name="handle" type="number" optional="false" desc="Trigger handle"/>
+		<input name="demolision" type="boolean" optional="true" desc="If true, small debris and vehicles are ignored"/>
+		<output name="empty" type="boolean" desc="True if trigger is empty"/>
+		<output name="maxpoint" type="table" desc="World space point of highest point (largest Y coordinate) if not empty"/>
+	</function>
+	<function name="FindScreen">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first screen with specified tag or zero if not found"/>
+	</function>
+	<function name="FindScreens">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all screens with specified tag"/>
+	</function>
+	<function name="SetScreenEnabled">
+		<input name="screen" type="number" optional="false" desc="Screen handle"/>
+		<input name="enabled" type="boolean" optional="false" desc="True if screen should be enabled"/>
+	</function>
+	<function name="IsScreenEnabled">
+		<input name="screen" type="number" optional="false" desc="Screen handle"/>
+		<output name="enabled" type="boolean" desc="True if screen is enabled"/>
+	</function>
+	<function name="GetScreenShape">
+		<input name="screen" type="number" optional="false" desc="Screen handle"/>
+		<output name="shape" type="number" desc="Shape handle or zero if none"/>
+	</function>
+	<function name="FindVehicle">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="handle" type="number" desc="Handle to first vehicle with specified tag or zero if not found"/>
+	</function>
+	<function name="FindVehicles">
+		<input name="tag" type="string" optional="false" desc="Tag name"/>
+		<input name="global" type="boolean" optional="true" desc="Search in entire scene"/>
+		<output name="list" type="table" desc="Indexed table with handles to all vehicles with specified tag"/>
+	</function>
+	<function name="GetVehicleTransform">
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+		<output name="transform" type="table" desc="Transform of vehicle"/>
+	</function>
+	<function name="GetVehicleBody">
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+		<output name="body" type="number" desc="Main body of vehicle"/>
+	</function>
+	<function name="GetVehicleHealth">
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+		<output name="health" type="number" desc="Vehicle health (zero to one)"/>
+	</function>
+	<function name="GetVehicleDriverPos">
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+		<output name="pos" type="table" desc="Driver position as vector in vehicle space"/>
+	</function>
+	<function name="DriveVehicle">
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+		<input name="drive" type="number" optional="false" desc="Reverse/forward control -1 to 1"/>
+		<input name="steering" type="number" optional="false" desc="Left/right control -1 to 1"/>
+		<input name="handbrake" type="boolean" optional="false" desc="Handbrake control"/>
+	</function>
+	<function name="GetPlayerPos">
+		<output name="position" type="table" desc="Player center position"/>
+	</function>
+	<function name="GetPlayerTransform">
+		<input name="includePitch" type="boolean" optional="false" desc="Include the player pitch (look up/down) in transform"/>
+		<output name="transform" type="table" desc="Current player transform"/>
+	</function>
+	<function name="SetPlayerTransform">
+		<input name="transform" type="table" optional="false" desc="Desired player transform"/>
+		<input name="includePitch" type="boolean" optional="false" desc="Set player pitch (look up/down) as well"/>
+	</function>
+	<function name="GetPlayerCameraTransform">
+		<output name="transform" type="table" desc="Current player camera transform"/>
+	</function>
+	<function name="SetPlayerSpawnTransform">
+		<input name="transform" type="table" optional="false" desc="Desired player spawn transform"/>
+	</function>
+	<function name="GetPlayerVelocity">
+		<output name="velocity" type="table" desc="Player velocity in world space as vector"/>
+	</function>
+	<function name="SetPlayerVehicle">
+		<input name="vehicle" type="value" optional="false" desc="Handle to vehicle or zero to not drive."/>
+	</function>
+	<function name="SetPlayerVelocity">
+		<input name="velocity" type="table" optional="false" desc="Player velocity in world space as vector"/>
+	</function>
+	<function name="GetPlayerVehicle">
+		<output name="handle" type="number" desc="Current vehicle handle, or zero if not in vehicle"/>
+	</function>
+	<function name="GetPlayerGrabShape">
+		<output name="handle" type="number" desc="Handle to grabbed shape or zero if not grabbing."/>
+	</function>
+	<function name="GetPlayerGrabBody">
+		<output name="handle" type="number" desc="Handle to grabbed body or zero if not grabbing."/>
+	</function>
+	<function name="GetPlayerPickShape">
+		<output name="handle" type="number" desc="Handle to picked shape or zero if nothing is picked"/>
+	</function>
+	<function name="GetPlayerPickBody">
+		<output name="handle" type="number" desc="Handle to picked body or zero if nothing is picked"/>
+	</function>
+	<function name="GetPlayerInteractShape">
+		<output name="handle" type="number" desc="Handle to interactable shape or zero"/>
+	</function>
+	<function name="GetPlayerInteractBody">
+		<output name="handle" type="number" desc="Handle to interactable body or zero"/>
+	</function>
+	<function name="SetPlayerScreen">
+		<input name="handle" type="number" optional="false" desc="Handle to screen or zero for no screen"/>
+	</function>
+	<function name="GetPlayerScreen">
+		<output name="handle" type="number" desc="Handle to interacted screen or zero if none"/>
+	</function>
+	<function name="SetPlayerHealth">
+		<input name="health" type="number" optional="false" desc="Set player health (between zero and one)"/>
+	</function>
+	<function name="GetPlayerHealth">
+		<output name="health" type="number" desc="Current player health"/>
+	</function>
+	<function name="RespawnPlayer">
+	</function>
+	<function name="RegisterTool">
+		<input name="id" type="string" optional="false" desc="Tool unique identifier"/>
+		<input name="name" type="string" optional="false" desc="Tool name to show in hud"/>
+		<input name="file" type="string" optional="false" desc="Path to vox file"/>
+		<input name="group" type="number" optional="true" desc="Tool group for this tool (1-6) Default is 6."/>
+	</function>
+	<function name="GetToolBody">
+		<output name="handle" type="number" desc="Handle to currently visible tool body or zero if none"/>
+	</function>
+	<function name="SetToolTransform">
+		<input name="transform" type="table" optional="false" desc="Tool body transform"/>
+		<input name="sway" type="number" optional="false" desc="Tool sway amount. Default is 1.0."/>
+	</function>
+	<function name="LoadSound">
+		<input name="path" type="string" optional="false" desc="Path to ogg sound file"/>
+		<output name="handle" type="number" desc="Sound handle"/>
+	</function>
+	<function name="LoadLoop">
+		<input name="path" type="string" optional="false" desc="Path to ogg sound file"/>
+		<output name="handle" type="number" desc="Loop handle"/>
+	</function>
+	<function name="PlaySound">
+		<input name="handle" type="number" optional="false" desc="Sound handle"/>
+		<input name="pos" type="table" optional="true" desc="World position as vector. Default is player position."/>
+		<input name="volume" type="number" optional="true" desc="Playback volume. Default is 1.0"/>
+	</function>
+	<function name="PlayLoop">
+		<input name="handle" type="number" optional="false" desc="Loop handle"/>
+		<input name="pos" type="table" optional="true" desc="World position as vector. Default is player position."/>
+		<input name="volume" type="number" optional="true" desc="Playback volume. Default is 1.0"/>
+	</function>
+	<function name="PlayMusic">
+		<input name="path" type="string" optional="false" desc="Music path"/>
+	</function>
+	<function name="StopMusic">
+	</function>
+	<function name="LoadSprite">
+		<input name="path" type="string" optional="false" desc="Path to sprite. Must be PNG or JPG format."/>
+		<output name="handle" type="number" desc="Sprite handle"/>
+	</function>
+	<function name="DrawSprite">
+		<input name="handle" type="number" optional="false" desc="Sprite handle"/>
+		<input name="transform" type="table" optional="false" desc="Transform"/>
+		<input name="width" type="number" optional="false" desc="Width in meters"/>
+		<input name="height" type="number" optional="false" desc="Height in meters"/>
+		<input name="r" type="number" optional="true" desc="Red color. Default 1.0."/>
+		<input name="g" type="number" optional="true" desc="Green color. Default 1.0."/>
+		<input name="b" type="number" optional="true" desc="Blue color. Default 1.0."/>
+		<input name="a" type="number" optional="true" desc="Alpha. Default 1.0."/>
+		<input name="depthTest" type="boolean" optional="true" desc="Depth test enabled. Default false."/>
+		<input name="additive" type="boolean" optional="true" desc="Additive blending enabled. Default false."/>
+	</function>
+	<function name="QueryRequire">
+		<input name="layers" type="string" optional="false" desc="Space separate list of layers"/>
+	</function>
+	<function name="QueryRejectVehicle">
+		<input name="vehicle" type="number" optional="false" desc="Vehicle handle"/>
+	</function>
+	<function name="QueryRejectBody">
+		<input name="body" type="number" optional="false" desc="Body handle"/>
+	</function>
+	<function name="QueryRejectShape">
+		<input name="shape" type="number" optional="false" desc="Shape handle"/>
+	</function>
+	<function name="QueryRaycast">
+		<input name="origin" type="table" optional="false" desc="Raycast origin as world space vector"/>
+		<input name="direction" type="table" optional="false" desc="Unit length raycast direction as world space vector"/>
+		<input name="maxDist" type="number" optional="false" desc="Raycast maximum distance. Keep this as low as possible for good performance."/>
+		<input name="radius" type="number" optional="true" desc="Raycast thickness. Default zero."/>
+		<input name="rejectTransparent" type="boolean" optional="true" desc="Raycast through transparent materials. Default false."/>
+		<output name="hit" type="boolean" desc="True if raycast hit something"/>
+		<output name="dist" type="number" desc="Hit distance from origin"/>
+		<output name="normal" type="table" desc="World space normal at hit point"/>
+		<output name="shape" type="number" desc="Handle to hit shape"/>
+	</function>
+	<function name="QueryClosestPoint">
+		<input name="origin" type="table" optional="false" desc="World space point"/>
+		<input name="maxDist" type="number" optional="false" desc="Maximum distance. Keep this as low as possible for good performance."/>
+		<output name="hit" type="boolean" desc="True if a point was found"/>
+		<output name="point" type="table" desc="World space closest point"/>
+		<output name="normal" type="table" desc="World space normal at closest point"/>
+		<output name="shape" type="number" desc="Handle to closest shape"/>
+	</function>
+	<function name="QueryAabbShapes">
+		<input name="min" type="table" optional="false" desc="Aabb minimum point"/>
+		<input name="max" type="table" optional="false" desc="Aabb maximum point"/>
+		<output name="list" type="table" desc="Indexed table with handles to all shapes in the aabb"/>
+	</function>
+	<function name="QueryAabbBodies">
+		<input name="min" type="table" optional="false" desc="Aabb minimum point"/>
+		<input name="max" type="table" optional="false" desc="Aabb maximum point"/>
+		<output name="list" type="table" desc="Indexed table with handles to all bodies in the aabb"/>
+	</function>
+	<function name="GetLastSound">
+		<output name="volume" type="number" desc="Volume of loudest sound played last frame"/>
+		<output name="position" type="table" desc="World position of loudest sound played last frame"/>
+	</function>
+	<function name="IsPointInWater">
+		<input name="point" type="table" optional="false" desc="World point as vector"/>
+		<output name="inWater" type="boolean" desc="True if point is in water"/>
+		<output name="depth" type="number" desc="Depth of point into water, or zero if not in water"/>
+	</function>
+	<function name="ParticleReset">
+	</function>
+	<function name="ParticleType">
+		<input name="type" type="string" optional="false" desc="Type of particle. Can be 'smoke' or 'plain'."/>
+	</function>
+	<function name="ParticleTile">
+		<input name="type" type="int" optional="false" desc="Tile in the particle texture atlas (0-15)"/>
+	</function>
+	<function name="ParticleColor">
+		<input name="r0" type="float" optional="false" desc="Red value"/>
+		<input name="g0" type="float" optional="false" desc="Green value"/>
+		<input name="b0" type="float" optional="false" desc="Blue value"/>
+		<input name="r1" type="float" optional="true" desc="Red value at end"/>
+		<input name="g1" type="float" optional="true" desc="Green value at end"/>
+		<input name="b1" type="float" optional="true" desc="Blue value at end"/>
+	</function>
+	<function name="ParticleRadius">
+		<input name="r0" type="float" optional="false" desc="Radius"/>
+		<input name="r1" type="float" optional="true" desc="End radius"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleAlpha">
+		<input name="a0" type="float" optional="false" desc="Alpha (0.0 - 1.0)"/>
+		<input name="a1" type="float" optional="true" desc="End alpha (0.0 - 1.0)"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleGravity">
+		<input name="g0" type="float" optional="false" desc="Gravity"/>
+		<input name="g1" type="float" optional="true" desc="End gravity"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleDrag">
+		<input name="d0" type="float" optional="false" desc="Drag"/>
+		<input name="d1" type="float" optional="true" desc="End drag"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleEmissive">
+		<input name="d0" type="float" optional="false" desc="Emissive"/>
+		<input name="d1" type="float" optional="true" desc="End emissive"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleRotation">
+		<input name="r0" type="float" optional="false" desc="Rotation speed in radians per second."/>
+		<input name="r1" type="float" optional="true" desc="End rotation speed in radians per second."/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleStretch">
+		<input name="s0" type="float" optional="false" desc="Stretch"/>
+		<input name="s1" type="float" optional="true" desc="End stretch"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleSticky">
+		<input name="s0" type="float" optional="false" desc="Sticky (0.0 - 1.0)"/>
+		<input name="s1" type="float" optional="true" desc="End sticky (0.0 - 1.0)"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleCollide">
+		<input name="c0" type="float" optional="false" desc="Collide (0.0 - 1.0)"/>
+		<input name="c1" type="float" optional="true" desc="End collide (0.0 - 1.0)"/>
+		<input name="interpolation" type="string" optional="true" desc="Interpolation method: linear, smooth, easein, easeout or constant. Default is linear."/>
+		<input name="fadein" type="float" optional="true" desc="Fade in between t=0 and t=fadein. Default is zero."/>
+		<input name="fadeout" type="float" optional="true" desc="Fade out between t=fadeout and t=1. Default is one."/>
+	</function>
+	<function name="ParticleFlags">
+		<input name="bitmask" type="number" optional="false" desc="Particle flags (bitmask 0-65535)"/>
+	</function>
+	<function name="SpawnParticle">
+		<input name="pos" type="table" optional="false" desc="World space point as vector"/>
+		<input name="velocity" type="table" optional="false" desc="World space velocity as vector"/>
+		<input name="lifetime" type="number" optional="false" desc="Particle lifetime in seconds"/>
+	</function>
+	<function name="Shoot">
+		<input name="origin" type="table" optional="false" desc="Origin in world space as vector"/>
+		<input name="direction" type="table" optional="false" desc="Unit length direction as world space vector"/>
+		<input name="type" type="number" optional="true" desc="0 is regular bullet (default) and 1 is rocket"/>
+	</function>
+	<function name="MakeHole">
+		<input name="position" type="table" optional="false" desc="Hole center point"/>
+		<input name="r0" type="number" optional="false" desc="Hole radius for soft materials"/>
+		<input name="r1" type="number" optional="true" desc="Hole radius for medium materials. May not be bigger than r0. Default zero."/>
+		<input name="r2" type="number" optional="true" desc="Hole radius for hard materials. May not be bigger than r1. Default zero."/>
+		<input name="silent" type="boolean" optional="true" desc="Make hole without playing any break sounds."/>
+	</function>
+	<function name="Explosion">
+		<input name="pos" type="table" optional="false" desc="Position in world space as vector"/>
+		<input name="size" type="number" optional="false" desc="Explosion size from 0.5 to 4.0"/>
+	</function>
+	<function name="SpawnFire">
+		<input name="pos" type="table" optional="false" desc="Position in world space as vector"/>
+	</function>
+	<function name="GetFireCount">
+		<output name="count" type="number" desc="Number of active fires in level"/>
+	</function>
+	<function name="QueryClosestFire">
+		<input name="origin" type="table" optional="false" desc="World space position as vector"/>
+		<input name="maxDist" type="number" optional="false" desc="Maximum search distance"/>
+		<output name="hit" type="boolean" desc="A fire was found within search distance"/>
+		<output name="pos" type="table" desc="Position of closest fire"/>
+	</function>
+	<function name="QueryAabbFireCount">
+		<input name="min" type="table" optional="false" desc="Aabb minimum point"/>
+		<input name="max" type="table" optional="false" desc="Aabb maximum point"/>
+		<output name="count" type="number" desc="Number of active fires in bounding box"/>
+	</function>
+	<function name="RemoveAabbFires">
+		<input name="min" type="table" optional="false" desc="Aabb minimum point"/>
+		<input name="max" type="table" optional="false" desc="Aabb maximum point"/>
+		<output name="count" type="number" desc="Number of fires removed"/>
+	</function>
+	<function name="GetCameraTransform">
+		<output name="transform" type="table" desc="Current camera transform"/>
+	</function>
+	<function name="SetCameraTransform">
+		<input name="transform" type="table" optional="false" desc="Desired camera transform"/>
+		<input name="fov" type="number" optional="true" desc="Optional horizontal field of view in degrees (default: 90)"/>
+	</function>
+	<function name="SetCameraFov">
+		<input name="float" type="number" optional="false" desc="Horizontal field of view in degrees (10-170)"/>
+	</function>
+	<function name="PointLight">
+		<input name="pos" type="table" optional="false" desc="World space light position"/>
+		<input name="r" type="number" optional="false" desc="Red"/>
+		<input name="g" type="number" optional="false" desc="Green"/>
+		<input name="b" type="number" optional="false" desc="Blue"/>
+		<input name="intensity" type="number" optional="true" desc="Intensity. Default is 1.0."/>
+	</function>
+	<function name="SetTimeScale">
+		<input name="scale" type="number" optional="false" desc="Time scale 0.1 to 1.0"/>
+	</function>
+	<function name="SetEnvironmentDefault">
+	</function>
+	<function name="SetEnvironmentProperty">
+		<input name="name" type="string" optional="false" desc="Property name"/>
+		<input name="value0" type="varying" optional="false" desc="Property value (type depends on property)"/>
+		<input name="value1" type="varying" optional="true" desc="Extra property value (only some properties)"/>
+		<input name="value2" type="varying" optional="true" desc="Extra property value (only some properties)"/>
+		<input name="value3" type="varying" optional="true" desc="Extra property value (only some properties)"/>
+	</function>
+	<function name="GetEnvironmentProperty">
+		<input name="name" type="string" optional="false" desc="Property name"/>
+		<output name="value0" type="varying" desc="Property value (type depends on property)"/>
+		<output name="value1" type="varying" desc="Property value (only some properties)"/>
+		<output name="value2" type="varying" desc="Property value (only some properties)"/>
+		<output name="value3" type="varying" desc="Property value (only some properties)"/>
+		<output name="value4" type="varying" desc="Property value (only some properties)"/>
+	</function>
+	<function name="SetPostProcessingDefault">
+	</function>
+	<function name="SetPostProcessingProperty">
+		<input name="name" type="string" optional="false" desc="Property name"/>
+		<input name="value0" type="number" optional="false" desc="Property value"/>
+		<input name="value1" type="number" optional="true" desc="Extra property value (only some properties)"/>
+		<input name="value2" type="number" optional="true" desc="Extra property value (only some properties)"/>
+	</function>
+	<function name="GetPostProcessingProperty">
+		<input name="name" type="string" optional="false" desc="Property name"/>
+		<output name="value0" type="number" desc="Property value"/>
+		<output name="value1" type="number" desc="Property value (only some properties)"/>
+		<output name="value2" type="number" desc="Property value (only some properties)"/>
+	</function>
+	<function name="DrawLine">
+		<input name="p0" type="table" optional="false" desc="World space point as vector"/>
+		<input name="p1" type="table" optional="false" desc="World space point as vector"/>
+		<input name="r" type="number" optional="true" desc="Red"/>
+		<input name="g" type="number" optional="true" desc="Green"/>
+		<input name="b" type="number" optional="true" desc="Blue"/>
+		<input name="a" type="number" optional="true" desc="Alpha"/>
+	</function>
+	<function name="DebugLine">
+		<input name="p0" type="table" optional="false" desc="World space point as vector"/>
+		<input name="p1" type="table" optional="false" desc="World space point as vector"/>
+		<input name="r" type="number" optional="true" desc="Red"/>
+		<input name="g" type="number" optional="true" desc="Green"/>
+		<input name="b" type="number" optional="true" desc="Blue"/>
+		<input name="a" type="number" optional="true" desc="Alpha"/>
+	</function>
+	<function name="DebugCross">
+		<input name="p0" type="table" optional="false" desc="World space point as vector"/>
+		<input name="r" type="number" optional="true" desc="Red"/>
+		<input name="g" type="number" optional="true" desc="Green"/>
+		<input name="b" type="number" optional="true" desc="Blue"/>
+		<input name="a" type="number" optional="true" desc="Alpha"/>
+	</function>
+	<function name="DebugWatch">
+		<input name="name" type="string" optional="false" desc="Name"/>
+		<input name="value" type="string" optional="false" desc="Value"/>
+	</function>
+	<function name="DebugPrint">
+		<input name="message" type="string" optional="false" desc="Message to display"/>
+	</function>
+	<function name="UiMakeInteractive">
+	</function>
+	<function name="UiPush">
+	</function>
+	<function name="UiPop">
+	</function>
+	<function name="UiWidth">
+		<output name="width" type="number" desc="Width of draw context"/>
+	</function>
+	<function name="UiHeight">
+		<output name="height" type="number" desc="Height of draw context"/>
+	</function>
+	<function name="UiCenter">
+		<output name="center" type="number" desc="Half width of draw context"/>
+	</function>
+	<function name="UiMiddle">
+		<output name="middle" type="number" desc="Half height of draw context"/>
+	</function>
+	<function name="UiColor">
+		<input name="r" type="number" optional="false" desc="Red channel"/>
+		<input name="g" type="number" optional="false" desc="Green channel"/>
+		<input name="b" type="number" optional="false" desc="Blue channel"/>
+		<input name="a" type="number" optional="true" desc="Alpha channel. Default 1.0"/>
+	</function>
+	<function name="UiColorFilter">
+		<input name="r" type="number" optional="false" desc="Red channel"/>
+		<input name="g" type="number" optional="false" desc="Green channel"/>
+		<input name="b" type="number" optional="false" desc="Blue channel"/>
+		<input name="a" type="number" optional="true" desc="Alpha channel. Default 1.0"/>
+	</function>
+	<function name="UiTranslate">
+		<input name="x" type="number" optional="false" desc="X component"/>
+		<input name="y" type="number" optional="false" desc="Y component"/>
+	</function>
+	<function name="UiRotate">
+		<input name="angle" type="number" optional="false" desc="Angle in degrees, counter clockwise"/>
+	</function>
+	<function name="UiScale">
+		<input name="x" type="number" optional="false" desc="X component"/>
+		<input name="y" type="number" optional="true" desc="Y component. Default value is x."/>
+	</function>
+	<function name="UiWindow">
+		<input name="width" type="number" optional="false" desc="Window width"/>
+		<input name="height" type="number" optional="false" desc="Window height"/>
+		<input name="clip" type="boolean" optional="true" desc="Clip content outside window. Default is false."/>
+	</function>
+	<function name="UiSafeMargins">
+		<output name="x0" type="number" desc="Left"/>
+		<output name="y0" type="number" desc="Top"/>
+		<output name="x1" type="number" desc="Right"/>
+		<output name="y1" type="number" desc="Bottom"/>
+	</function>
+	<function name="UiAlign">
+		<input name="alignment" type="string" optional="false" desc="Alignment keywords"/>
+	</function>
+	<function name="UiModalBegin">
+	</function>
+	<function name="UiModalEnd">
+	</function>
+	<function name="UiDisableInput">
+	</function>
+	<function name="UiEnableInput">
+	</function>
+	<function name="UiReceivesInput">
+		<output name="receives" type="boolean" desc="True if current context receives input"/>
+	</function>
+	<function name="UiGetMousePos">
+		<output name="x" type="number" desc="X coordinate"/>
+		<output name="y" type="number" desc="Y coordinate"/>
+	</function>
+	<function name="UiIsMouseInRect">
+		<input name="w" type="number" optional="false" desc="Width"/>
+		<input name="h" type="number" optional="false" desc="Height"/>
+		<output name="inside" type="boolean" desc="True if mouse pointer is within rectangle"/>
+	</function>
+	<function name="UiWorldToPixel">
+		<input name="point" type="table" optional="false" desc="3D world position as vector"/>
+		<output name="x" type="number" desc="X coordinate"/>
+		<output name="y" type="number" desc="Y coordinate"/>
+		<output name="distance" type="number" desc="Distance to point"/>
+	</function>
+	<function name="UiPixelToWorld">
+		<input name="x" type="number" optional="false" desc="X coordinate"/>
+		<input name="y" type="number" optional="false" desc="Y coordinate"/>
+		<output name="direction" type="table" desc="3D world direction as vector"/>
+	</function>
+	<function name="UiBlur">
+		<input name="amount" type="number" optional="false" desc="Blur amount (0.0 to 1.0)"/>
+	</function>
+	<function name="UiFont">
+		<input name="path" type="string" optional="false" desc="Path to TTF font file"/>
+		<input name="size" type="number" optional="false" desc="Font size (10 to 100)"/>
+	</function>
+	<function name="UiFontHeight">
+		<output name="size" type="number" desc="Font size"/>
+	</function>
+	<function name="UiText">
+		<input name="text" type="string" optional="false" desc="Print text at cursor location"/>
+		<input name="move" type="boolean" optional="true" desc="Automatically move cursor vertically. Default false."/>
+		<output name="w" type="number" desc="Width of text"/>
+		<output name="h" type="number" desc="Height of text"/>
+	</function>
+	<function name="UiGetTextSize">
+		<input name="text" type="string" optional="false" desc="A text string"/>
+		<output name="w" type="number" desc="Width of text"/>
+		<output name="h" type="number" desc="Height of text"/>
+	</function>
+	<function name="UiWordWrap">
+		<input name="width" type="number" optional="false" desc="Maximum width of text"/>
+	</function>
+	<function name="UiTextOutline">
+		<input name="r" type="number" optional="false" desc="Red channel"/>
+		<input name="g" type="number" optional="false" desc="Green channel"/>
+		<input name="b" type="number" optional="false" desc="Blue channel"/>
+		<input name="a" type="number" optional="false" desc="Alpha channel"/>
+		<input name="thickness" type="number" optional="true" desc="Outline thickness. Default is 0.1"/>
+	</function>
+	<function name="UiTextShadow">
+		<input name="r" type="number" optional="false" desc="Red channel"/>
+		<input name="g" type="number" optional="false" desc="Green channel"/>
+		<input name="b" type="number" optional="false" desc="Blue channel"/>
+		<input name="a" type="number" optional="false" desc="Alpha channel"/>
+		<input name="distance" type="number" optional="true" desc="Shadow distance. Default is 1.0"/>
+		<input name="blur" type="number" optional="true" desc="Shadow blur. Default is 0.5"/>
+	</function>
+	<function name="UiRect">
+		<input name="w" type="number" optional="false" desc="Width"/>
+		<input name="h" type="number" optional="false" desc="Height"/>
+	</function>
+	<function name="UiImage">
+		<input name="path" type="string" optional="false" desc="Path to image (PNG or JPG format)"/>
+		<output name="w" type="number" desc="Image width"/>
+		<output name="h" type="number" desc="Image height"/>
+	</function>
+	<function name="UiGetImageSize">
+		<input name="path" type="string" optional="false" desc="Path to image (PNG or JPG format)"/>
+		<output name="w" type="number" desc="Image width"/>
+		<output name="h" type="number" desc="Image height"/>
+	</function>
+	<function name="UiImageBox">
+		<input name="path" type="string" optional="false" desc="Path to image (PNG or JPG format)"/>
+		<input name="width" type="number" optional="false" desc="Width"/>
+		<input name="height" type="number" optional="false" desc="Height"/>
+		<input name="borderWidth" type="number" optional="false" desc="Border width"/>
+		<input name="borderHeight" type="number" optional="false" desc="Border height"/>
+	</function>
+	<function name="UiSound">
+		<input name="path" type="string" optional="false" desc="Path to sound file (OGG format)"/>
+		<input name="volume" type="number" optional="true" desc="Playback volume. Default 1.0"/>
+		<input name="pitch" type="number" optional="true" desc="Playback pitch. Default 1.0"/>
+		<input name="pan" type="number" optional="true" desc="Playback stereo panning (-1.0 to 1.0). Default 0.0."/>
+	</function>
+	<function name="UiSoundLoop">
+		<input name="path" type="string" optional="false" desc="Path to looping sound file (OGG format)"/>
+		<input name="volume" type="number" optional="true" desc="Playback volume. Default 1.0"/>
+	</function>
+	<function name="UiMute">
+		<input name="amount" type="number" optional="false" desc="Mute by this amount (0.0 to 1.0)"/>
+		<input name="music" type="boolean" optional="true" desc="Mute music as well"/>
+	</function>
+	<function name="UiButtonImageBox">
+		<input name="path" type="string" optional="false" desc="Path to image (PNG or JPG format)"/>
+		<input name="borderWidth" type="number" optional="false" desc="Border width"/>
+		<input name="borderHeight" type="number" optional="false" desc="Border height"/>
+		<input name="r" type="number" optional="true" desc="Red multiply. Default 1.0"/>
+		<input name="g" type="number" optional="true" desc="Green multiply. Default 1.0"/>
+		<input name="b" type="number" optional="true" desc="Blue multiply. Default 1.0"/>
+		<input name="a" type="number" optional="true" desc="Alpha channel. Default 1.0"/>
+	</function>
+	<function name="UiButtonHoverColor">
+		<input name="r" type="number" optional="false" desc="Red multiply"/>
+		<input name="g" type="number" optional="false" desc="Green multiply"/>
+		<input name="b" type="number" optional="false" desc="Blue multiply"/>
+		<input name="a" type="number" optional="true" desc="Alpha channel. Default 1.0"/>
+	</function>
+	<function name="UiButtonPressColor">
+		<input name="r" type="number" optional="false" desc="Red multiply"/>
+		<input name="g" type="number" optional="false" desc="Green multiply"/>
+		<input name="b" type="number" optional="false" desc="Blue multiply"/>
+		<input name="a" type="number" optional="true" desc="Alpha channel. Default 1.0"/>
+	</function>
+	<function name="UiButtonPressDist">
+		<input name="dist" type="number" optional="false" desc="Press distance"/>
+	</function>
+	<function name="UiTextButton">
+		<input name="text" type="string" optional="false" desc="Text on button"/>
+		<input name="w" type="number" optional="true" desc="Button width"/>
+		<input name="h" type="number" optional="true" desc="Button height"/>
+		<output name="pressed" type="boolean" desc="True if user clicked button"/>
+	</function>
+	<function name="UiImageButton">
+		<input name="path" type="number" optional="false" desc="Image path (PNG or JPG file)"/>
+		<input name="w" type="number" optional="true" desc="Button width"/>
+		<input name="h" type="number" optional="true" desc="Button height"/>
+		<output name="pressed" type="boolean" desc="True if user clicked button"/>
+	</function>
+	<function name="UiBlankButton">
+		<input name="w" type="number" optional="false" desc="Button width"/>
+		<input name="h" type="number" optional="false" desc="Button height"/>
+		<output name="pressed" type="boolean" desc="True if user clicked button"/>
+	</function>
+	<function name="UiSlider">
+		<input name="path" type="number" optional="false" desc="Image path (PNG or JPG file)"/>
+		<input name="axis" type="string" optional="false" desc="Drag axis, must be 'x' or 'y'"/>
+		<input name="current" type="number" optional="false" desc="Current value"/>
+		<input name="min" type="number" optional="false" desc="Minimum value"/>
+		<input name="max" type="number" optional="false" desc="Maximum value"/>
+		<output name="value" type="number" desc="New value, same as current if not changed"/>
+		<output name="done" type="boolean" desc="True if user is finished changing (released slider)"/>
+	</function>
+	<function name="UiGetScreen">
+		<output name="handle" type="number" desc="Handle to the screen running this script or zero if none."/>
+	</function>
+</api>

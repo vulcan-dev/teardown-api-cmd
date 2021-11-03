@@ -27,8 +27,6 @@ func drawTitle() {
 	fmt.Println(appStyle.Render(welcome.String()))
 }
 
-var status string = ">"
-
 func drawStatus() {
 	width := 14
 	statusBarStyle := lipgloss.NewStyle().
@@ -51,7 +49,7 @@ func drawStatus() {
 		statusKey := statusStyle.Render("COMMAND")
 		statusVal := statusText.Copy().
 			Width(width - w(statusKey)).
-			Render(status)
+			Render("> ")
 
 		bar := lipgloss.JoinHorizontal(lipgloss.Top,
 			statusKey,
