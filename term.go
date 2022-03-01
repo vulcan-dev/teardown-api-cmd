@@ -23,7 +23,7 @@ func drawTitle() {
 		BorderTop(true).
 		BorderBottom(true).
 		BorderForeground(borderStyle).
-		Render("Enter a Command" + divider + info("[ Use 'help' ] v1.3.3 RTX Dominator  ") + info(onlineStatus))
+		Render("Enter a Command" + divider + info("[ Use 'help' ] v1.3.4 Supermario  ") + info(onlineStatus))
 
 	welcome.WriteString(title)
 
