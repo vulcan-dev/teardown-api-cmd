@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"strings"
 
 	log "github.com/amoghe/distillog"
@@ -23,6 +24,8 @@ var (
 	command SCommands
 	input string
 	offline bool
+	
+	clear = make(map[string]func())
 )
 
 func SetupAPIFile() error {
@@ -87,11 +90,24 @@ func main() {
 		"help": command.Help,
 		"list": command.List,
 		"find": command.Find,
+		"clear": command.Clear,
 		"search": command.Find,
 		"doc": command.DOC,
 		"version": command.Version,
 		"download": command.Download,
 	}
+	
+	clear["linux"] = func() { 
+        cmd := exec.Command("clear")
+        cmd.Stdout = os.Stdout
+        cmd.Run()
+    }
+
+    clear["windows"] = func() {
+        cmd := exec.Command("cmd", "/c", "cls")
+        cmd.Stdout = os.Stdout
+        cmd.Run()
+    }
 	
 	HandleInput(commandMap)
 }

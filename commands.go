@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"runtime"
 	"sort"
 	"strings"
 )
@@ -22,6 +23,7 @@ Help Usage: Help (Command)
 	if len(arguments) >= 1 {
 		commands := make(map[string] string);
 		commands["version"] = "Displays current API Version"
+		commands["clear"] = "Clears the screen"
 		commands["list"] = "Lists all functions"
 		commands["find"] = "Find a function via full function name or a partial name"
 		commands["search"] = "Alias of find"
@@ -78,6 +80,15 @@ func (Command *SCommands) List(arguments ...[]string) error {
 	for fn := range functions {
 		fmt.Println(functions[fn])
 	}
+	
+	return nil
+}
+
+func (Command *SCommands) Clear(arguments ...[]string) error {	
+	value, _ := clear[runtime.GOOS]
+	value()
+	
+	drawTitle()
 	
 	return nil
 }
